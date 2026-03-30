@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEMS | Advanced Multi-Agent System</title>
+
+    <!-- 引入 Bootstrap 5 & Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <!-- 引入动画库 -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- 引入图标 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+    <style>
+
+        :root {
+            --primary-blue: #007AFF;
+            --dark-blue: #003366;
+    --tech-gradient: linear-gradient(to right, #6ea8fe 0%, #007AFF 100%);
+            --bg-light: #f8faff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--tech-gradient);
+            color: white;
+            padding: 100px 0 80px 0;
+            text-align: center;
+            clip-path: ellipse(150% 100% at 50% 0%);
+        }
+
+        .hero h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 4rem; /* 稍微调大了一点标题 */
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px; /* Logo 和文字的间距 */
+        }
+
+        /* Logo 样式 */
+        .hero-logo {
+            height: 80px; /* 根据需要调整高度 */
+            width: auto;
+            object-fit: contain;
+        }
+
+        .hero p {
+            font-size: 2rem; /* 调大了副标题字号 */
+            font-weight: 700;
+            opacity: 0.95;
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            line-height: 1;
+        }
+
+        /* 按钮样式 */
+        .btn-tech {
+            background: white;
+            color: var(--dark-blue);
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: all 0.3s;
+            border: none;
+            margin: 5px;
+        }
+
+        .btn-tech:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        /* 卡片样式 */
+        .tech-card {
+            background: white;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,122,255,0.15);
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 80px 0 40px 0;
+            font-weight: 700;
+            color: var(--dark-blue);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: var(--primary-blue);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        /* Abstract Box */
+        .abstract-container {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            border-top: 8px solid var(--primary-blue);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        /* Demo Section */
+        #demo-box {
+            background: #e9ecef;
+            padding: 40px;
+            border-radius: 30px;
+            border: 2px dashed var(--primary-blue);
+        }
+
+        .img-compare-label {
+            background: var(--dark-blue);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        /* Loading Spinner */
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid var(--primary-blue);
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+
+        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        pre {
+            background: #272c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Hero Section -->
+<header class="hero">
+    <div class="container" data-aos="fade-up">
+        <h1>
+            <img src="static/images/logo.png" alt="GEMS Logo" class="hero-logo">
+            GEMS
+        </h1>
+        <p>Agent-Native Multimodal Generation with Memory and Skills</p>
+
+        <!-- 移除了作者列表 -->
+
+        <div>
+            <a href="#" class="btn btn-tech"><i class="bi bi-file-earmark-pdf"></i> Paper</a>
+            <a href="https://github.com/lcqysl/GEMS" class="btn btn-tech"><i class="bi bi-github"></i> Code</a>
+            <a href="#demo" class="btn btn-tech"><i class="bi bi-play-circle"></i> Live Demo</a>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- Abstract -->
+    <section class="row justify-content-center" style="margin-top: -50px;">
+        <div class="col-lg-10" data-aos="fade-up">
+            <div class="abstract-container">
+                <h2 class="section-title mt-0 mb-4">Abstract</h2>
+                <p class="text-muted" style="text-align: justify; font-size: 1.1rem;">
+                    Recent multimodal generation models have achieved remarkable progress on general-purpose generation tasks, yet continue to struggle with complex instructions and specialized downstream tasks. Inspired by the success of advanced agent frameworks such as Claude Code, we propose <b class="text-primary">GEMS</b> (Agent-Native Multimodal <b class="text-primary">GE</b>neration with <b class="text-primary">M</b>emory and <b class="text-primary">S</b>kills), a framework that pushes beyond the inherent limitations of foundational models on both general and downstream tasks. GEMS is built upon three core components. Agent Loop introduces a structured multi-agent framework that iteratively improves generation quality through closed-loop optimization. Agent Memory provides a persistent, trajectory-level memory that hierarchically stores both factual states and compressed experiential summaries, enabling a global view of the optimization process while reducing redundancy. Agent Skill offers an extensible collection of domain-specific expertise with on-demand loading, allowing the system to effectively handle diverse downstream applications. Across five mainstream tasks and four downstream tasks, evaluated on multiple generative backends, GEMS consistently achieves significant performance gains. Most notably, it enables a lightweight 6B model Z-Image-Turbo to surpass the state-of-the-art Nano Banana 2 on
+GenEval2, demonstrating the effectiveness of agent harness in extending model capabilities beyond their original limits.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Results (Figure 1) -->
+    <h2 class="section-title" data-aos="fade-up">Overall Performance</h2>
+    <div class="row justify-content-center">
+        <div class="col-lg-10" data-aos="zoom-in">
+            <div class="tech-card p-4 text-center" style="background: white; border-top: 5px solid var(--primary-blue);">
+                <img src="static/images/fig1_performance.png" class="img-fluid rounded-3 mb-4 shadow-sm" alt="Overall Performance">
+                <div class="px-3" style="text-align: justify;">
+                    <p class="text-muted">
+                        <i class="bi bi-graph-up-arrow text-primary"></i>
+                        <b>Overall Performance:</b> GEMS enables the lightweight 6B model <b>Z-Image-Turbo</b> to outperform
+                        prominent closed-source models such as <span class="badge bg-secondary">Nano Banana</span> and
+                        <span class="badge bg-secondary">GPT-Image 1</span> across various tasks.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Pillars -->
+    <h2 class="section-title" data-aos="fade-up">Three Core Pillars</h2>
+    <div class="row g-4">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="tech-card p-4 text-center">
+                <div class="text-primary fs-1 mb-3"><i class="bi bi-arrow-repeat"></i></div>
+                <h4>Agent Loop</h4>
+                <p class="text-muted text-start">Iteratively refines results through collaborative roles (Planner, Verifier, Refiner) to ensure high-fidelity performance on complex tasks.</p>
+            </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="tech-card p-4 text-center">
+                <div class="text-primary fs-1 mb-3"><i class="bi bi-cpu"></i></div>
+                <h4>Agent Memory</h4>
+                <p class="text-muted text-start">Persistent mechanism that resolves information redundancy through hierarchical compression of optimization trajectories.</p>
+            </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="tech-card p-4 text-center">
+                <div class="text-primary fs-1 mb-3"><i class="bi bi-tools"></i></div>
+                <h4>Agent Skill</h4>
+                <p class="text-muted text-start">An extensible repository of domain-specific expertise utilized via on-demand loading to handle diverse downstream applications.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Architecture Figure -->
+    <h2 class="section-title" data-aos="fade-up">Methodology</h2>
+    <div class="row justify-content-center">
+        <div class="col-lg-10 text-center" data-aos="zoom-in">
+            <img src="static/images/fig2_architecture.png" class="img-fluid rounded-4 shadow-lg mb-3" alt="Architecture">
+        </div>
+    </div>
+
+    <!-- LIVE DEMO -->
+    <section id="demo" class="my-5 pt-5">
+        <h2 class="section-title" data-aos="fade-up">Live Demo</h2>
+        <div id="demo-box" data-aos="fade-up">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="mb-4">
+                        <p class="text-muted text-center mb-3" style="font-size: 0.9rem;">
+                            <i class="bi bi-lightbulb"></i> Enter a prompt or select an example to try GEMS:
+                        </p>
+                        <div class="example-list d-flex flex-column gap-3">
+    <!-- Example 1: Creative Drawing (从朴素的“书”触发创意想象) -->
+    <div class="d-flex align-items-center p-2 rounded-4 bg-white border border-light shadow-sm">
+        <button class="btn btn-outline-primary btn-sm rounded-pill px-3 flex-shrink-0 me-3"
+                style="min-width: 160px;"
+                onclick="setPrompt('A book floating in the sky, creative and cool concept, make it look artistic and dreamy.')">
+            <i class="bi bi-magic me-1"></i> Creative Drawing
+        </button>
+        <span class="text-muted small">
+            "A book floating in the sky, <b class="text-primary">creative</b> and <b class="text-primary">cool</b> concept, make it look <b class="text-primary">artistic</b> and <b class="text-primary">dreamy</b>."
+        </span>
+    </div>
+
+    <!-- Example 2: Aesthetic Drawing (从朴素的“山脉”触发专业审美) -->
+    <div class="d-flex align-items-center p-2 rounded-4 bg-white border border-light shadow-sm">
+        <button class="btn btn-outline-primary btn-sm rounded-pill px-3 flex-shrink-0 me-3"
+                style="min-width: 160px;"
+                onclick="setPrompt('A mountain range at sunrise, professional art, masterpiece, award-winning quality.')">
+            <i class="bi bi-palette me-1"></i> Aesthetic Drawing
+        </button>
+        <span class="text-muted small">
+            "A mountain range at sunrise, <b class="text-primary">professional art</b>, <b class="text-primary">masterpiece</b>, <b class="text-primary">award-winning</b> quality."
+        </span>
+    </div>
+</div>
+                    </div>
+
+                    <div class="input-group input-group-lg shadow-sm">
+                        <input id="promptInput" type="text" class="form-control border-0" placeholder="Enter a prompt or click an example above...">
+                        <button class="btn btn-primary px-4" type="button" onclick="runDemo()">Run Inference</button>
+                    </div>
+
+                    <div id="loading" style="display:none;" class="mt-4 text-center">
+                        <span class="loader"></span>
+                        <p class="mt-2 text-primary font-monospace small">Agentic Reasoning in Progress...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5 g-4" id="demoResult" style="display:none;">
+                <div class="col-md-6">
+                    <div class="tech-card p-3 text-center">
+                        <span class="img-compare-label">Z-Image-Turbo</span>
+                        <img id="baselineImg" src="" class="img-fluid rounded-3 mt-2">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="tech-card p-3 text-center border border-primary">
+                        <span class="img-compare-label" style="background:var(--primary-blue)">+GEMS</span>
+                        <img id="ourImg" src="" class="img-fluid rounded-3 mt-2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Citation -->
+    <h2 class="section-title" data-aos="fade-up">Citation</h2>
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10" data-aos="fade-up">
+            <pre><code>@article{he2026gems,
+  title={GEMS: Agent-Native Multimodal Generation with Memory and Skills},
+  author={He, Zefeng and Huang, Siyuan and Qu, Xiaoye and Li, Yafu and Zhu, Tong and Cheng, Yu and Yang, Yang},
+  journal={arXiv preprint arXiv:2603.XXXXX},
+  year={2026}
+}</code></pre>
+        </div>
+    </div>
+
+</main>
+
+<footer class="py-5 text-center text-muted border-top mt-5">
+    <p>&copy; 2026 GEMS Project Team. Built with Tech Sense.</p>
+</footer>
+
+<!-- 引入脚本 -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+
+    async function runDemo() {
+        const prompt = document.getElementById('promptInput').value;
+        const backendUrl = "https://video-noticed-explanation-degrees.trycloudflare.com/generate";
+
+        if (!prompt) { alert("Please enter a prompt!"); return; }
+
+        document.getElementById('loading').style.display = 'block';
+        document.getElementById('demoResult').style.display = 'none';
+
+        try {
+            const response = await fetch(backendUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: prompt })
+            });
+            const data = await response.json();
+
+            if (data.status === "success") {
+                document.getElementById('baselineImg').src = data.baseline;
+                document.getElementById('ourImg').src = data.GEMS;
+                document.getElementById('demoResult').style.display = 'flex';
+                document.getElementById('demoResult').scrollIntoView({ behavior: 'smooth' });
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Live Demo is currently unavailable.");
+        } finally {
+            document.getElementById('loading').style.display = 'none';
+        }
+    }
+
+    function setPrompt(text) {
+        document.getElementById('promptInput').value = text;
+    }
+</script>
+
+</body>
+</html>
